@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="InClassWork.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:InClassWork.Views"
+    Title="InClassWork">
+
+    <!--<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPageView}"
+        Route="MainPage" />-->
+
+    <TabBar>
+        <Tab Icon="home.png">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPageView}"
+                Route="MainPageView" />
+        </Tab>
+
+        <Tab Icon="account.png">
+            <ShellContent
+                Title="Account"
+                ContentTemplate="{DataTemplate local:AccountPageView}"
+                Route="AccountPage" />
+        </Tab>
+        <Tab Icon="admin.png">
+            <ShellContent
+                Title="Admin"
+                ContentTemplate="{DataTemplate local:AdminPageView}"
+                IsVisible="{Binding IsAdminVisible}"
+                Route="AdminPage" />
+        </Tab>
+        <Tab Icon="signout.png">
+            <ShellContent>
+                <Button
+                    Margin="15"
+                    Command="{Binding SignOutCommand}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </ShellContent>
+        </Tab>
+    </TabBar>
+
+
+    <!--<FlyoutItem Title="Home" Icon="home.png">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPageView}"
+            Route="MainPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Admin" Icon="admin.png">
+        <ShellContent
+            Title="Admin"
+            ContentTemplate="{DataTemplate local:AdminPageView}"
+            Route="AdminPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Users List" Icon="garden.png">
+        <ShellContent
+            Title="Users List"
+            ContentTemplate="{DataTemplate local:UsersListView}"
+            Route="UsersList" />
+    </FlyoutItem>-->
+
+
+</Shell>
