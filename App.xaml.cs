@@ -16,8 +16,14 @@ namespace InClassWork
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            NavigationPage navigationPage = new NavigationPage(new SignInWorkout());
+			NavigationPage navigationPage = new NavigationPage(new SignInWorkout());
+			//NavigationPage navigationPage = new NavigationPage(new UsersListView());
 			return new Window(navigationPage);
+
+
+			// Start with the SignIn page as the root of the Window
+			//var window = new Window(new UsersListView());
+			//return window;
 		}
-    }
+	}
 }

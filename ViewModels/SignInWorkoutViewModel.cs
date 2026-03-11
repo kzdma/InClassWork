@@ -137,6 +137,10 @@ namespace InClassWork.ViewModels
 				}
 			});
 			_navigationPage = navigationPage;
+
+			//Debug Mode
+			UserName = "a";
+			UserPassword = "a";
 		}
 
 		private void TogglePassordButtonClick()
@@ -152,6 +156,8 @@ namespace InClassWork.ViewModels
 		private void SignInButtonClick()
 		{
 			ErrorMessageVisible = true;
+
+
 			if (_db!.isExist(UserName, UserPassword))
 			{
 				//Get User from DB
@@ -161,15 +167,31 @@ namespace InClassWork.ViewModels
 				(App.Current as App)!.CurrentUser = user;
 
 				//Navigate to MainPage
-				Application.Current!.Windows[0].Page = new AppShell();
+				// SWAP the page on the existing window
+				if (Application.Current?.Windows.Count > 0)
+				{
+					Application.Current.Windows[0].Page = new AppShell();
+				}
 			}
 			else
 			{
 				ErrorMessage = AppMessages.SignInErrorMessage;
 				ErrorMessageColor = Colors.Red;
 			}
-		}
 
+
+			// Use the Dispatcher to prevent the white/blank screen
+			//MainThread.BeginInvokeOnMainThread(() =>
+			//{
+			//	var window = Application.Current?.Windows.FirstOrDefault();
+			//	if (window != null)
+			//	{
+			//		// Resetting the Page here via Dispatcher ensures the UI thread is ready
+			//		window.Page = new AppShell();
+			//	}
+			//});
+		}
+		
 		private bool CanSignIn()
 		{
 			return !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword));

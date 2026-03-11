@@ -6,62 +6,44 @@
     xmlns:local="clr-namespace:InClassWork.Views"
     Title="InClassWork">
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPageView}"
-        Route="MainPage" />-->
+    <!--<Shell.TitleView>
+        <Grid Padding="10" ColumnDefinitions="*, Auto">
+            <Label Grid.Column="0" Text="My App" VerticalOptions="Center" FontAttributes="Bold" />
+            <ImageButton
+            Grid.Column="1"
+            Source="signout.png"
+            Command="{Binding SignOutCommand}"
+            HeightRequest="40"
+            WidthRequest="40"
+            VerticalOptions="Center" />
+        </Grid>
+    </Shell.TitleView>-->
 
     <TabBar>
         <Tab Icon="home.png">
             <ShellContent
-                Title="Home"
-                ContentTemplate="{DataTemplate local:MainPageView}"
-                Route="MainPageView" />
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPageView}"
+            Route="MainPageView" />
         </Tab>
-
         <Tab Icon="account.png">
             <ShellContent
-                Title="Account"
-                ContentTemplate="{DataTemplate local:AccountPageView}"
-                Route="AccountPage" />
+            Title="Account"
+            ContentTemplate="{DataTemplate local:AccountPageView}"
+            Route="AccountPage" />
         </Tab>
         <Tab Icon="admin.png">
             <ShellContent
-                Title="Admin"
-                ContentTemplate="{DataTemplate local:AdminPageView}"
-                IsVisible="{Binding IsAdminVisible}"
-                Route="AdminPage" />
-        </Tab>
-        <Tab Icon="signout.png">
-            <ShellContent>
-                <Button
-                    Margin="15"
-                    Command="{Binding SignOutCommand}"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center" />
-            </ShellContent>
-        </Tab>
-    </TabBar>
-
-
-    <!--<FlyoutItem Title="Home" Icon="home.png">
-        <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate local:MainPageView}"
-            Route="MainPage" />
-    </FlyoutItem>
-    <FlyoutItem Title="Admin" Icon="admin.png">
-        <ShellContent
             Title="Admin"
             ContentTemplate="{DataTemplate local:AdminPageView}"
+            IsVisible="{Binding IsAdminVisible}"
             Route="AdminPage" />
-    </FlyoutItem>
-    <FlyoutItem Title="Users List" Icon="garden.png">
-        <ShellContent
-            Title="Users List"
-            ContentTemplate="{DataTemplate local:UsersListView}"
-            Route="UsersList" />
-    </FlyoutItem>-->
-
-
+        </Tab>
+        <Tab Icon="signout.png">
+            <ShellContent
+            Title="SignOut"
+            ContentTemplate="{DataTemplate local:SignOutView}"
+            Route="SignOutView" />
+        </Tab>
+    </TabBar>
 </Shell>

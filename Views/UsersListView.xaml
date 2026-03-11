@@ -1,12 +1,142 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="InClassWork.Views.UsersListView"
-             Title="UsersListView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to UsersList!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="InClassWork.Views.UsersListView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:InClassWork.Models"
+    xmlns:viewmodels="clr-namespace:InClassWork.ViewModels">
+
+    <Grid RowDefinitions=".13*,.13*,.9*">
+
+        <!--  Header/Title  -->
+        <Grid ColumnDefinitions="7*,3*">
+            <Label
+                Margin="80,0,0,0"
+                FontAttributes="Bold"
+                FontSize="30"
+                HorizontalOptions="Center"
+                Text="Users List"
+                TextColor="CadetBlue"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <!--  Find && Filter Users 1:10  -->
+        <Grid Grid.Row="1" ColumnDefinitions="7*,3*">
+            <SearchBar Placeholder="find user" />
+            <Button
+                Grid.Column="1"
+                Margin="0,0,0,15"
+                Background="Transparent"
+                FontFamily="MaterialIcons"
+                FontSize="25"
+                Text="{Binding UsersFilterButtonText}"
+                TextColor="DarkMagenta" />
+        </Grid>
+
+        <!--  Users Collection  -->
+        <CollectionView
+            Grid.Row="2"
+            ItemsSource="{Binding AllUsers}"
+            SelectionMode="None">
+
+            <!--  מה מציגים כאשר אין משתמשים  -->
+            <CollectionView.EmptyView>
+                <StackLayout
+                    Padding="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+
+                    <Label
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="Users not found!"
+                        TextColor="Gray" />
+
+                    <Label
+                        Margin="0,0,0,100"
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="Pull down to refresh"
+                        TextColor="Gray" />
+                </StackLayout>
+            </CollectionView.EmptyView>
+
+            <!--  CollectionView Item Template  -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:AppUser">
+
+                    <!--  Swipe View  -->
+                    <SwipeView>
+
+                        <SwipeView.LeftItems>
+                            <SwipeItem
+                                Text="View"
+                                Command="{Binding Path=NavigateToAccountPageCommand, 
+                                                  Source={x:RelativeSource AncestorType={x:Type viewmodels:UsersListViewModel}},
+                                                  x:DataType='viewmodels:UsersListViewModel'}"
+                                CommandParameter="{Binding .}"
+                                IconImageSource="account.png"/>
+                            
+                        </SwipeView.LeftItems>
+
+                        <Border
+                            Margin="15,7"
+                            Padding="15"
+                            Background="White"
+                            Stroke="LightGray"
+                            StrokeShape="RoundRectangle 10">
+                            <Grid
+                                ColumnDefinitions="*,Auto"
+                                RowDefinitions="Auto, Auto"
+                                RowSpacing="5">
+
+                                <HorizontalStackLayout>
+                                    <!--  User First Name  -->
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding FirstName}"
+                                        VerticalOptions="Center" />
+                                    <!--  User Last Name  -->
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding LastName}"
+                                        VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+
+                                <!--  User Email  -->
+                                <Label
+                                    Grid.Row="1"
+                                    FontSize="13"
+                                    Text="{Binding UserEmail}"
+                                    TextColor="Gray"
+                                    VerticalOptions="Center" />
+
+                                <!--  Registration Date  -->
+                                <Border
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    Padding="10,5"
+                                    BackgroundColor="{AppThemeBinding Light=LightGray,
+                                                                      Dark=#333333}"
+                                    StrokeShape="RoundRectangle 15"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        Text="{Binding RegDate, StringFormat='{0:dd/MM/yyyy}'}"
+                                        VerticalOptions="Center" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
 </ContentPage>
