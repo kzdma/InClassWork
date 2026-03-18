@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="InClassWork.Views.AccountPageView"
-             Title="AccountPageView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Account Page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="InClassWork.Views.AccountPageView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="AccountPageView">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.0" Color="#C6426E" />
+            <GradientStop Offset="1.0" Color="#642B73" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <!--<Grid ColumnDefinitions="*,8*,*" RowDefinitions="1.5*,4*,*">-->
+        <Grid ColumnDefinitions="0.1*,8*,0.1*" RowDefinitions=".8*,2.6*,5.5*,*" />
+    </Grid>
+
+
 </ContentPage>

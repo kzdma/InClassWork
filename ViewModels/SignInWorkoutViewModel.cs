@@ -139,8 +139,8 @@ namespace InClassWork.ViewModels
 			_navigationPage = navigationPage;
 
 			//Debug Mode
-			UserName = "a";
-			UserPassword = "a";
+			UserName = "admin@mail.com";
+			UserPassword = "123456";
 		}
 
 		private void TogglePassordButtonClick()
