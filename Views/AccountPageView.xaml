@@ -3,6 +3,7 @@
     x:Class="InClassWork.Views.AccountPageView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
     Title="AccountPageView">
 
     <ContentPage.Background>
@@ -12,10 +13,152 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <Grid>
-        <!--<Grid ColumnDefinitions="*,8*,*" RowDefinitions="1.5*,4*,*">-->
-        <Grid ColumnDefinitions="0.1*,8*,0.1*" RowDefinitions=".8*,2.6*,5.5*,*" />
-    </Grid>
 
+    <!--<Grid ColumnDefinitions="*,8*,*" RowDefinitions="1.5*,4*,*">-->
+    <Grid ColumnDefinitions="0.1*,8*,0.1*" RowDefinitions=".8*,2.6*,5.5*,*">
+
+        <!--  Delete ImageButton  -->
+        <HorizontalStackLayout
+            Grid.ColumnSpan="3"
+            Margin="0,10,20,0"
+            HorizontalOptions="End"
+            IsVisible="{Binding IsDeleteButtonVisible}"
+            VerticalOptions="Center">
+            <Button
+                Background="Transparent"
+                Command="{Binding DeleteCommand}"
+                FontFamily="MaterialIcons"
+                FontSize="40"
+                HeightRequest="60"
+                Text="{Binding DeleteIcon}"
+                TextColor="Wheat" />
+
+        </HorizontalStackLayout>
+
+        <!--  User Image  -->
+        <StackLayout
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,10,0,0"
+            VerticalOptions="Start">
+
+            <Border
+                Background="Transparent"
+                HeightRequest="120"
+                HorizontalOptions="Center"
+                Stroke="#ccc"
+                StrokeThickness="1"
+                VerticalOptions="Center"
+                WidthRequest="120">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="60" />
+                </Border.StrokeShape>
+
+                <ImageButton
+                    Aspect="Fill"
+                    Command="{Binding GetUserImageCommand}"
+                    HeightRequest="120"
+                    Source="{Binding UserImageSource, TargetNullValue='user_default.jpg'}" />
+            </Border>
+        </StackLayout>
+
+
+        <!--  User Fields  -->
+        <VerticalStackLayout
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="20,0,20,0">
+
+            <!--  שדה שם פרטי  -->
+            <Border
+                Margin="0,0,0,10"
+                Padding="10"
+                HeightRequest="60"
+                Stroke="#ccc"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+
+                <Entry
+                    FontSize="15"
+                    Placeholder="First Name"
+                    Text="{Binding FirstName}"
+                    TextColor="Wheat" />
+
+            </Border>
+            <!--  שדה שם משפחה  -->
+            <Border
+                Margin="0,0,0,10"
+                Padding="10"
+                HeightRequest="60"
+                Stroke="#ccc"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+
+                <Entry
+                    FontSize="15"
+                    Placeholder="Last Name"
+                    Text="{Binding LastName}"
+                    TextColor="Wheat" />
+
+            </Border>
+            <!--  שדה דואל  -->
+            <Border
+                Margin="0,0,0,10"
+                Padding="10"
+                HeightRequest="60"
+                Stroke="#ccc"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+
+                <Entry
+                    FontSize="15"
+                    IsEnabled="False"
+                    Keyboard="Email"
+                    Placeholder="Email"
+                    Text="{Binding UserEmail}"
+                    TextColor="Gray" />
+
+            </Border>
+            <!--  שדה מספר נייד  -->
+            <Border
+                Margin="0,0,0,10"
+                Padding="10"
+                HeightRequest="60"
+                Stroke="#ccc"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+
+                <Entry
+                    FontSize="15"
+                    Keyboard="Telephone"
+                    Placeholder="Mobile"
+                    Text="{Binding UserMobile}"
+                    TextColor="Wheat" />
+
+            </Border>
+
+
+            <VerticalStackLayout Grid.Row="4" />
+
+            <!--  Error Message  -->
+            <Label
+                Margin="30,0,0,10"
+                IsVisible="{Binding ErrorMessageIsVisible}"
+                Text="{Binding ErrorMessage}"
+                TextColor="#ff4dd2" />
+
+            <!--  כפתור עדכון  -->
+            <Button
+                Margin="0,10,0,0"
+                Command="{Binding UpdateCommand}"
+                CornerRadius="8"
+                FontSize="18"
+                HeightRequest="50"
+                Text="Update" />
+
+        </VerticalStackLayout>
+
+    </Grid>
 
 </ContentPage>
