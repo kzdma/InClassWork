@@ -40,9 +40,20 @@ namespace InClassWork.ViewModels
 		}
 
 		[RelayCommand]
-		private void NavigateToAccountPage()
-		{		
-			Shell.Current.GoToAsync("AccountPageView");
+		private async Task NavigateToAccountPage(AppUser user)
+		{
+			if (user != null)
+			{
+				// Navigate to the account page for the selected user
+				//await Shell.Current.GoToAsync (@$"UserDetailsPage?UserId={user.Id}");
+				Dictionary<string, object> param = new Dictionary<string, object>();
+				param.Add("selectedUser", user);
+				await Shell.Current.GoToAsync("AccountPageView", param);
+			}
+			else
+			{
+				// Handle the case where user is null, if necessary
+			}			
 		}
 
 		[ObservableProperty]

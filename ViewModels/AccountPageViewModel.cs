@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace InClassWork.ViewModels
 {
-	public partial class AccountPageViewModel: ObservableObject
+	
+	public partial class AccountPageViewModel: ObservableObject, IQueryAttributable
 	{
 		#region Properties
 		[ObservableProperty]
@@ -50,7 +51,33 @@ namespace InClassWork.ViewModels
 
 		public AccountPageViewModel()
 		{
+
 			DeleteIcon = FontHelper.DELETE_USER_ICON;
+		}
+
+		//AccountViewModel Entry Point
+		public void ApplyQueryAttributes(IDictionary<string, object> query)
+		{
+			RecievedUser = query.ContainsKey("selectedUser") ? (AppUser)query["selectedUser"] : null;
+
+			if (RecievedUser != null) // Load the user from UsersListPage
+			{
+				LoadUserDetails(RecievedUser);
+				IsDeleteButtonVisible = RecievedUser.Id != (App.Current as App)!.CurrentUser!.Id; // Show delete button if not current user
+			}
+			else // Load the user from CurrentUser
+			{
+				// If no user is received, load the current user details
+				LoadUserDetails((App.Current as App)!.CurrentUser!);
+			}
+		}
+
+		private void LoadUserDetails(AppUser user)
+		{
+			FirstName = user.FirstName!;
+			LastName = user.LastName!;
+			UserEmail = user.UserEmail!;
+			UserMobile = user.UserMobile!;			
 		}
 
 		[RelayCommand]
